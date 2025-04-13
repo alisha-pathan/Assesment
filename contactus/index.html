@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact us </title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+
+    <div class="contact-container">
+        <div class="left-col">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d58750.948584153375!2d72.5611385!3d23.026184899999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1744528492256!5m2!1sen!2sin"
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="right-col">
+            <div class="theme-switch-wrapper">
+                <br>
+                HELLOW USER
+            </div>
+
+            <h1>Contact us</h1>
+            <p>Planning to visit Indonesia soon? Get insider tips on where to go, things to do and find best deals for
+                your next adventure.</p>
+
+            <form id="contact-form">
+                <!-- name  -->
+                <input type="text" id="name" name="name" placeholder="Your Full Name">
+                <!-- company  -->
+                <input type="text" id="company" name="company" placeholder="Your company Name">
+                <!-- mail  -->
+                <input type="email" id="email" name="email" placeholder="Your Email Address">
+                <!-- phone  -->
+                <input type="text" id="phone" name="phone" placeholder="Your phone number">
+                <!-- address  -->
+                <textarea rows="6" placeholder="Your Address" id="address" name="address"></textarea>
+                <!-- sybmit  -->
+                <button type="submit" id="submit" name="submit">submit</button>
+
+            </form>
+            <div id="error"></div>
+            <div id="success-msg"></div>
+        </div>
+    </div>
+
+    <script>
+        let details = []
+
+
+        let name = document.getElementById('name')
+        let company = document.getElementById('company')
+        let email = document.getElementById('email')
+        let phone = document.getElementById('phone')
+        let address = document.getElementById('address')
+
+        let contactform = document.getElementById('contact-form');
+        document.addEventListener('DOMContentLoaded', () => {
+            contactform.addEventListener('submit', handlesub);
+            phone.addEventListener('blur', change);
+            name.addEventListener('blur', handlename);
+            company.addEventListener('blur', handlename);
+        });
+        function handlesub(e) {
+            e.preventDefault();
+
+            if (name.value == "" || phone.value == "" || email.value == "" || address.value == "") {
+                alert("All fields are required");
+                return;
+            }
+            else {
+
+                let data =
+                {
+                    name: name.value.trim(),
+                    company: company.value.trim(),
+                    email: email.value.trim(),
+                    phone: phone.value.trim(),
+                    address: address.value.trim(),
+                }
+
+                details.push(data);
+
+                console.log(details);
+
+            }
+
+        }
+
+        function change() {
+            let pattern = /^[0-9]{10}$/;
+
+            if (!pattern.test(phone.value)) {
+                console.log("Not valid");
+                phone.value = "";
+                phone.focus();
+            }
+
+            return true;
+
+        }
+        function handlename() {
+            let pattern = /^[a-zA-Z]{3,6}$/;
+            if (!pattern.test(name.value)) {
+                console.log("Not text");
+                name.value = "";
+                name.focus();
+            }
+
+            return true;
+        }
+
+    </script>
+</body>
+
+</html>
